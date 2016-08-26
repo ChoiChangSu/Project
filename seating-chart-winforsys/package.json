@@ -1,0 +1,30 @@
+{
+  "name": "seating-chart-winforsys",
+  "version": "1.0.0",
+  "description": "Seating Chart App for Winforsys & DKEC",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "author": "ydji@winforsys.com",
+  "license": "JYD",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "bootstrap": "^3.3.7",
+    "cfenv": "^1.0.3",
+    "cookie-parser": "^1.4.3",
+    "csvtojson": "^1.0.0",
+    "ejs": "^2.5.1",
+    "express": "^4.14.0",
+    "express-ejs-layouts": "^2.2.0",
+    "express-session": "^1.14.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.10.0"
+  },
+  "repository": {},
+  "engines": {
+    "node": "6.2.x"
+  }
+}

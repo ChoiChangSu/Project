@@ -1,0 +1,9 @@
+
+<% if (login == true) { %>
+<map name="seatmap">
+<% coords.forEach( function(coord) { %>
+	<area shape="rect" coords="<%= coord.x1 + ',' + coord.y1 + ',' + coord.x2 + ',' + coord.y2 %>" 
+	href="/register?x=<%=coord.x1%>&y=<%=coord.y1%>"/>
+<% }) %>
+</map>
+<% } %>

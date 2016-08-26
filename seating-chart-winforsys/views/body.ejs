@@ -1,0 +1,28 @@
+
+<div class="container" style="margin-left:0">
+    <div class="row">
+        
+        <% if (login == true) { %>
+        <form action="/register" method="POST">
+        <% } else { %>
+        <form action="#" method="POST">
+        <% } %>
+        <div style="position: relative;">
+            <img src="/images/wsc_v_resized.png" alt="winforsys" usemap="#seatmap" style="width: 2267px;">
+            <!-- <img src="/images/wsc_v_resized.png" alt="winforsys" usemap="#seatmap" style="width: 1024px;"> -->
+
+            <% include occupied_pos %>
+        
+        </div>
+        </form>
+
+        <% include map %>
+
+    </div>
+
+    <hr>
+
+    <footer>
+    <p>&copy; 2016 Winforsys Co., Ltd.</p>
+    </footer>
+</div> <!-- /container -->

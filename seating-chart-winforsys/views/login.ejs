@@ -1,0 +1,18 @@
+          
+    <!-- begin: from login template --> 
+    <% if (login == true) { %>
+          <ul class="nav navbar-nav navbar-left">
+          <!-- <ul class="nav navbar-nav navbar-right"> -->
+            <li></li><li></li>
+            <li class="active"><a href="/logout"><%=uname %> <span class="sr-only">(current)</span></a></li>
+          </ul>
+    <% } else { %>
+          <form class="navbar-form navbar-left" action="/login" method="POST">
+          <!-- <form class="navbar-form navbar-right" action="/login" method="POST"> -->
+            <div class="form-group">
+              <input type="text" name="emailid" placeholder="Email ID" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+          </form>
+    <% } %>
+    <!-- end: from login template -->
