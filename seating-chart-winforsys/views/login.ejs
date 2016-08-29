@@ -4,7 +4,10 @@
           <ul class="nav navbar-nav navbar-left">
           <!-- <ul class="nav navbar-nav navbar-right"> -->
             <li></li><li></li>
-            <li class="active"><a href="/logout"><%=uname %> <span class="sr-only">(current)</span></a></li>
+            <!-- <li class="active"><a href="/logout"><%=uname %> <span class="sr-only">(current)</span></a></li> -->
+            <div stype="font-size: 2.0em">
+                <li class="active"><%=uname %> <span class="sr-only">(current)<font size="28"></font></span></a></li>
+            </div>
           </ul>
     <% } else { %>
           <form class="navbar-form navbar-left" action="/login" method="POST">
