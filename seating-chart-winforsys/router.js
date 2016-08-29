@@ -2,6 +2,10 @@ const querystring = require("querystring"),
     //formidable = require("formidable"),
     url = require("url"),
     fs = require("fs");
+
+//Add by cyberccs 2016-08-29 이벤트 강제 발생
+var customEvent = new process.EventEmitter();
+
 const Converter = require("csvtojson").Converter;
 
 var g_userInfo = undefined;
@@ -31,6 +35,16 @@ fs.appendFile("./occupied.csv", "date,uid,uname,x,y,dept\n", (err) => {
 
     console.log("Appended header into occupied.csv");
 });
+/*
+fs.appendFile("./occupied.csv", "date,uid,uname,x,y,dept\n", (err) => {
+    if (err) {
+        console.log(err);
+        return;
+    }
+
+    console.log("Appended header into occupied.csv");
+});
+*/
 
 var g_styleMap_group = {
     '기획실': 'btn-default',
@@ -103,6 +117,8 @@ exports.index = function(req, res) {
             stylemap: g_styleMap_group
         };
         
+        console.log("GET Request handler '/' was called End. " + req.session.uname);
+
         res.render('layout', localVals);
     });    
 }
@@ -146,7 +162,10 @@ exports.login = function(req, res) {
 }
 
 exports.logout = function(req, res) {
-    console.log("Request handler '/logout' was called.");
+    console.log("Request handler '/logout' was called. Id : " + req.session.uid);
+    console.log("Request handler '/logout' was called. Name : " + req.session.uname);
+
+    //customEvent.emit('CsvReplace', req.session.uname);
 
     req.session.uid = undefined;
     req.session.uname = undefined;
@@ -228,3 +247,65 @@ exports.register = function(req, res) {
         res.redirect('/');
     });
 }
+
+//Add by cyberccs 2016-08-29 이벤트 강제 발생
+customEvent.on('CsvReplace', function(code, error){
+    console.log('occupied.csv Replace Start. Name : ' + code);
+
+    try{
+        fs.readFile('occupied.csv', 'utf8', function(error, data){
+            var string = data;
+            
+            var temp = [];
+            var arr = [];
+            var arrUser = [];
+            var index = 0;
+                
+            temp = string.toString().split('\n');
+            
+            console.log('Replace Name : ' + code);
+            //console.log('길이 : ' + temp.length);
+            
+            fs.open('./occupied.csv', 'w+', function(err, fd){
+                if (err) {
+                    console.log(err);
+                    
+                    throw err;
+                }
+
+                console.log('occupied.csv file open complete');
+            });
+                
+            for(var i = 0; i < temp.length; i++){            
+                var result = temp[i].toString().indexOf(code);
+                
+                if(result == -1){
+                    arr[index] = temp[i] + '\n';
+
+                    fs.appendFileSync('./occupied.csv', temp[i] + '\n');
+                    /*
+                    fs.appendFileSync('./occupied2.csv', temp[i] + '\n', (err) => {
+                        if (err) {
+                            console.log(err);
+                            
+                            return;
+                        }
+                    });
+                    */
+                    
+                    index++;
+                }
+            }
+                
+            //arrUser = temp[0].split(',');
+            
+            /*
+            fs.writeFile('occupied2.csv', arr.toString(), 'utf8', function(error){
+                console.log('Write SUCCESS');
+            });
+            */
+        });
+    } catch(e){
+        console.log(e);
+    }; 
+});

@@ -2,20 +2,24 @@
     <!-- begin: from login template --> 
     <% if (login == true) { %>
           <ul class="nav navbar-nav navbar-left">
-          <!-- <ul class="nav navbar-nav navbar-right"> -->
             <li></li><li></li>
-            <!-- <li class="active"><a href="/logout"><%=uname %> <span class="sr-only">(current)</span></a></li> -->
-            <div stype="font-size: 2.0em">
-                <li class="active"><%=uname %> <span class="sr-only">(current)<font size="28"></font></span></a></li>
-            </div>
+            <li class="active"><a href="/logout"><%=uname %> <span class="sr-only">(current)</span></a></li>
           </ul>
+          <!--
+          <form class="navbar-form navbar-left" action="/logout" method="GET">
+            <div class="form-group">
+              <span style="font-size:2em;"><%=uname %></span>
+            </div>
+            <button type="submit" class="btn btn-success">Log out</button>
+          </form>
+          -->
     <% } else { %>
           <form class="navbar-form navbar-left" action="/login" method="POST">
           <!-- <form class="navbar-form navbar-right" action="/login" method="POST"> -->
             <div class="form-group">
               <input type="text" name="emailid" placeholder="Email ID" class="form-control">
             </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
+            <button type="submit" class="btn btn-success">Log in</button>
           </form>
     <% } %>
     <!-- end: from login template -->
