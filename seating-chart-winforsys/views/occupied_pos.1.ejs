@@ -1,0 +1,21 @@
+    <% occupied.forEach((info) => { %>
+    <div class="display-name" style="position: absolute; top: <%=info.y + 18%>px; left: <%=info.x + 2%>px;">
+    <!-- <div class="display-name" style="position: absolute; top: <%=info.y + 10%>px; left: <%=info.x + 5%>px;"> -->
+        <% if (login == true) { 
+                var style = 'btn-info';
+                if (dept === info.dept) { 
+                    style = 'btn-warning';
+                } 
+                //console.log("style: " + style);
+        %>
+        <!--input type="hidden" name="coordidx" value="" /-->
+
+        <button type="submit" class="format2" name="loc" value="x=<%=info.x%>&y=<%=info.y%>"><%=info.uname%></button>
+        <!-- <button type="submit" class="btn btn-sm <%=style %> badge" name="loc" value="x=<%=info.x%>&y=<%=info.y%>"><%=info.uname%></button> -->
+        <% } else { 
+            //console.log("info.dept: " + info.dept + ", style map: " + stylemap[info.dept]);
+        %>
+        <button type="button" class="btn btn-sm <%=stylemap[info.dept] %> badge"><%=info.uname%></button>
+        <% } %>
+    </div>
+    <% }) %>

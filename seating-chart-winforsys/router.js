@@ -35,16 +35,6 @@ fs.appendFile("./occupied.csv", "date,uid,uname,x,y,dept\n", (err) => {
 
     console.log("Appended header into occupied.csv");
 });
-/*
-fs.appendFile("./occupied.csv", "date,uid,uname,x,y,dept\n", (err) => {
-    if (err) {
-        console.log(err);
-        return;
-    }
-
-    console.log("Appended header into occupied.csv");
-});
-*/
 
 var g_styleMap_group = {
     '기획실': 'btn-default',
@@ -166,7 +156,9 @@ exports.logout = function(req, res) {
     console.log("Request handler '/logout' was called. Id : " + req.session.uid);
     console.log("Request handler '/logout' was called. Name : " + req.session.uname);
 
-    //customEvent.emit('CsvReplace', req.session.uname);
+    //Add by cyberccs 2016-08-31
+    //UserReplace(req.session.uname, null);
+    //customEvent.emit('CsvReplace', req.session.uname, null);
 
     req.session.uid = undefined;
     req.session.uname = undefined;
@@ -219,14 +211,14 @@ exports.register = function(req, res) {
             '}\n' +
             '</script>';
         
-        console.log(html);
+        //console.log(html);
 
         res.send(html);        
         
         return;
     }
 
-    console.log("[DEBUG] GET:: x: " + req.query.x + ", y: " + req.query.y);
+    //console.log("[DEBUG] GET:: x: " + req.query.x + ", y: " + req.query.y);
 
     if (req.query.x == undefined || req.query.y == undefined) {
         res.sendStatus(403);
@@ -236,6 +228,13 @@ exports.register = function(req, res) {
     var today = (new Date).toLocaleDateString();
     var data = today + "," + req.session.uid + "," + req.session.uname + "," + req.query.x + "," + req.query.y + "," + req.session.dept + "\n";
 
+    //Add by cyberccs 2016-08-31
+    //customEvent.emit('CsvReplace', req.session.uname);
+    //customEvent.emit('AddUser', data);
+    //UserReplace(req.session.uname, data);
+    //AddUser(data);
+    //res.redirect('/');
+    
     //파일에 쓰기
     fs.appendFile("./occupied.csv", data, (err) => {
         if (err)
@@ -249,10 +248,9 @@ exports.register = function(req, res) {
     });
 }
 
-//Add by cyberccs 2016-08-29 이벤트 강제 발생
-customEvent.on('CsvReplace', function(code, error){
-    console.log('occupied.csv Replace Start. Name : ' + code);
-
+var UserReplace = function(code, code2){
+    console.log('[DEBUG] UserReplace Start. data : ' + code);
+    
     try{
         fs.readFile('occupied.csv', 'utf8', function(error, data){
             var string = data;
@@ -264,49 +262,80 @@ customEvent.on('CsvReplace', function(code, error){
                 
             temp = string.toString().split('\n');
             
-            console.log('Replace Name : ' + code);
-            //console.log('길이 : ' + temp.length);
+            //console.log('Replace Name : ' + code);
+            console.log('길이 : ' + temp.length);
             
-            fs.open('./occupied.csv', 'w+', function(err, fd){
+            fs.openSync('./occupied.csv', 'w', function(err, fd){
                 if (err) {
                     console.log(err);
                     
                     throw err;
                 }
-
-                console.log('occupied.csv file open complete');
             });
                 
             for(var i = 0; i < temp.length; i++){            
                 var result = temp[i].toString().indexOf(code);
                 
-                if(result == -1){
+                console.log('길이 : ' + temp[i].length);
+                console.log('[DEBUG] Data : ' + temp[i]);
+
+                if(result == -1 && temp[i].length != 0){
                     arr[index] = temp[i] + '\n';
 
                     fs.appendFileSync('./occupied.csv', temp[i] + '\n');
-                    /*
-                    fs.appendFileSync('./occupied2.csv', temp[i] + '\n', (err) => {
-                        if (err) {
-                            console.log(err);
-                            
-                            return;
-                        }
-                    });
-                    */
+
+                    console.log('[DEBUG] Appended data code : ' + temp[i]);
                     
                     index++;
                 }
             }
-                
-            //arrUser = temp[0].split(',');
-            
-            /*
-            fs.writeFile('occupied2.csv', arr.toString(), 'utf8', function(error){
-                console.log('Write SUCCESS');
-            });
-            */
+
+            if(code2 != null){
+                fs.appendFileSync('./occupied.csv', code2);
+
+                console.log('[DEBUG] Appended data code2 : ' + code2);
+            }
         });
     } catch(e){
         console.log(e);
-    }; 
+    };
+
+    console.log('[DEBUG] UserReplace End');
+};
+
+function AddUser(data){
+//var AddUser = function(data){
+    console.log('[DEBUG] AddUser Start. data : ' + data);
+
+    try{
+        if(data != null)
+        {
+            fs.open('./occupied.csv', 'w', function(err, fd){
+                if (err) {
+                    console.log(err);
+                    
+                    throw err;
+                }
+            });
+
+            //fs.appendFileSync('./occupied.csv', code2);
+
+            fs.appendFile("./occupied.csv", data, (err) => {
+                if (err)
+                { 
+                    throw err;
+                }
+
+                console.log("[DEBUG] Appended data AddUser : [" + data + "]");
+            });
+        }
+    } catch(e){
+        console.log(e);
+    };
+
+    console.log('[DEBUG] AddUser End');
+};
+
+//Add by cyberccs 2016-08-29 이벤트 강제 발생
+customEvent.on('Test', function(code, error){
 });
