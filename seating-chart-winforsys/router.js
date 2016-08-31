@@ -117,6 +117,7 @@ exports.index = function(req, res) {
             stylemap: g_styleMap_group
         };
         
+        //console.log(localVals);
         console.log("GET Request handler '/' was called End. " + req.session.uname);
 
         res.render('layout', localVals);
