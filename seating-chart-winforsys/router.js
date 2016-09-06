@@ -27,6 +27,7 @@ if (g_mapCoords == undefined) {
     });
 }
 
+//fs.appendFile("./occupied.csv", "date,uid,uname,x,y,dept\n", (err) => {
 fs.appendFile("./occupied.csv", "date,uid,uname,x,y,dept\n", (err) => {
     if (err) {
         console.log(err);
@@ -36,6 +37,23 @@ fs.appendFile("./occupied.csv", "date,uid,uname,x,y,dept\n", (err) => {
     console.log("Appended header into occupied.csv");
 });
 
+//Add by cyberccs 2016-09-02 팀 별 색상 변경
+var g_styleMap_group = {
+    '영업부': 'BusinessDept',
+    '기획실': 'PlanningDept',
+    '비전사업팀': 'VisionDept',
+    '연구소': 'ResearchDept',
+    'ALPHA팀': 'AlphaDept',
+    'CMS팀': 'CmsDept',
+    'FDS팀': 'FdsDept',
+    'SPNS팀': 'SpnsDept',
+    '해외지원팀': 'SupportDept',
+    'DNI팀': 'DniDept',
+    'SAPS팀': 'SapsDept',
+    'SMES팀': 'SmesDept',
+    'DKEC': 'DKEC'
+};
+/*
 var g_styleMap_group = {
     '기획실': 'btn-default',
     '비전사업팀': 'btn-primary',
@@ -45,6 +63,7 @@ var g_styleMap_group = {
     '전략개발그룹': 'btn-success',
     'DKEC': 'btn-default'
 };
+*/
 
 /////////////////////////////////////////////////////////////
 // index
@@ -99,7 +118,7 @@ exports.index = function(req, res) {
 
         var localVals = {
             uid: req.session.uid, 
-            uname: req.session.uname, 
+            uname: req.session.uname,
             dept: req.session.dept,
             login: loggedin, 
             coords: g_mapCoords, 
@@ -135,8 +154,8 @@ exports.login = function(req, res) {
         return item.uid == req.body.emailid; 
     });
 
-    //console.log("found user: ");
-    //console.log(found);
+    console.log("found user: ");
+    console.log(found);
     if (found.length > 0 && 'uname' in found[0] && found[0].uname != undefined && found[0].uname != "") {
         req.session.uid = req.body.emailid;
         req.session.uname = found[0].uname;

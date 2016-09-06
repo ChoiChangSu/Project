@@ -1,15 +1,46 @@
     <% occupied.forEach((info) => { %>
-    <div class="display-name" style="position: absolute; top: <%=info.y + 18%>px; left: <%=info.x + 2%>px;">
+    <div class="display-name" style="position: absolute; top: <%=info.y + 18%>px; left: <%=info.x-3%>px;">
     <!-- <div class="display-name" style="position: absolute; top: <%=info.y + 10%>px; left: <%=info.x + 5%>px;"> -->
         <% if (login == true) { 
                 var style = 'btn-info';
-                if (dept === info.dept) { 
+
+                /*Add by cyberccs 2016-09-01 버튼 색상 변경*/
+                /*
+                if (dept == "영업부") { 
+                    style = 'BusinessDept';
+                } else if (dept == "기획실") { 
+                    style = 'PlanningDept';
+                } else if (dept == "비전사업팀") { 
+                    style = 'VisionDept';
+                } else if (dept == "연구소") { 
+                    style = 'ResearchDept';
+                } else if (dept == "ALPHA팀") { 
+                    style = 'AlphaDept';
+                } else if (dept == "CMS팀") { 
+                    style = 'CmsDept';
+                } else if (dept == "FDS팀") { 
+                    style = 'FdsDept';
+                } else if (dept == "SPNS팀") { 
+                    style = 'SpnsDept';
+                } else if (dept == "해외지원팀") { 
+                    style = 'SupportDept';
+                } else if (dept == "DNI팀") { 
+                    style = 'DniDept';
+                } else if (dept === "SAPS팀") { 
+                    style = 'SapsDept';
+                } else if (dept == "SMES팀") { 
+                    style = 'SmesDept';
+                } else if (dept == "DKEC") { 
+                    style = 'DKEC';
+                } else{
                     style = 'btn-warning';
-                } 
-                //console.log("style: " + style);
+                }
+                */
         %>
-        <!--input type="hidden" name="coordidx" value="" /-->
-        <button type="submit" class="btn btn-sm <%=style %> badge" name="loc" value="x=<%=info.x%>&y=<%=info.y%>"><%=info.uname%></button>
+
+        <!-- <div class="<%=stylemap[info.dept] %>" style="cursor:point" onclick="./register">최창수</div> -->
+        <button type="submit" class="<%=stylemap[info.dept] %>" name="loc" value="x=<%=info.x%>&y=<%=info.y%>"><%=info.uname%></button>
+        <!-- <button type="submit" class="btn btn-sm <%=style %> badge" name="loc" value="x=<%=info.x%>&y=<%=info.y%>"><%=info.uname%></button> -->
         <% } else { 
             //console.log("info.dept: " + info.dept + ", style map: " + stylemap[info.dept]);
         %>
