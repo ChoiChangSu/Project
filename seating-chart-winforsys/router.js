@@ -86,31 +86,58 @@ exports.index = function(req, res) {
         //var uSet = new Set(result);
         //console.log("unique?: "); console.log([...uSet]);
         var today = (new Date).toLocaleDateString();
-        //console.log(today);
+        
+        console.log('TODAY : ' + today);
         //console.log((new Date).toString());
 
         var uniqResult = [];
-        var validResult = result
-            .filter((item) => { return item.date == today; })
-            .forEach((element, idx, array) => {
+        var validResult = result.filter((item) => {
+                console.log('ITEM DATE : ' + item.date);
+
+                return item.date == today; 
+            }).forEach((element, idx, array) => {
+                console.log('element');
+                console.log(element);
+                //console.log('element id : ' + element.uid);
+
                 var foundIndex = uniqResult.findIndex((elem, i, a) => {
+                    console.log('elem id : ' + elem.uid);
+
+                    console.log(i);
+                    console.log(a);
+
+                    console.log("foundIndex1 = " + foundIndex);
+
                     return elem.uid == element.uid;
                 });
-                //console.log("foundIndex=" + foundIndex);
+
+                console.log("foundIndex2 = " + foundIndex);
+
+                console.log("uniqResult1");
+                console.log(uniqResult);
+
                 uniqResult.push(element);
+
                 if (foundIndex >= 0) {
                     //uniqResult.splice(foundIndex, 1, element);
                     uniqResult.splice(foundIndex, 1);
                 }
+
+                console.log("uniqResult2");
+                console.log(uniqResult);
 
                 foundIndex = uniqResult.findIndex((elem, i, a) => {
                     return elem.uid != element.uid && elem.x == element.x && elem.y == element.y;
                 });
+
                 //console.log("foundIndex=" + foundIndex);
                 if (foundIndex >= 0) {
                     //uniqResult.splice(foundIndex, 1, element);
                     uniqResult.splice(foundIndex, 1);
                 }
+
+                console.log('uniqResult3');
+                console.log(uniqResult);
             });
 
         //console.log("Unique Result: ");
