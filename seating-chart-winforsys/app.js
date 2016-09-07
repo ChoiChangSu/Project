@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.static(__dirname + '/public'));
 
 //cyberccs
-console.log("[DEBUG] Dir Name : " + __dirname);
+//console.log("[DEBUG] Dir Name : " + __dirname);
 
 //app.use(expressLayouts);
 var appEnv = cfenv.getAppEnv();
