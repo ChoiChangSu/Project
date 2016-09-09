@@ -38,13 +38,13 @@
                 */
         %>
 
-        <!-- <div class="<%=stylemap[info.dept] %>" style="cursor:point" onclick="./register">최창수</div> -->
         <button type="submit" class="<%=stylemap[info.dept] %>" name="loc" value="x=<%=info.x%>&y=<%=info.y%>"><%=info.uname%></button>
         <!-- <button type="submit" class="btn btn-sm <%=style %> badge" name="loc" value="x=<%=info.x%>&y=<%=info.y%>"><%=info.uname%></button> -->
         <% } else { 
             //console.log("info.dept: " + info.dept + ", style map: " + stylemap[info.dept]);
         %>
-        <button type="button" class="btn btn-sm <%=stylemap[info.dept] %> badge"><%=info.uname%></button>
+        <button type="button" class="<%=stylemap[info.dept] %>"><%=info.uname%></button>
+        <!-- <button type="button" class="btn btn-sm <%=stylemap[info.dept] %> badge"><%=info.uname%></button> -->
         <% } %>
     </div>
     <% }) %>

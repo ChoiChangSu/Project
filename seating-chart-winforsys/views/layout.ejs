@@ -23,9 +23,31 @@
     </head>
     <body>
         
-  <% include header %>
+    <% include header %>
 
-  <% include body %>
+    <% include body %>
+
+    <!-- Add by cyberccs 2016-09-07 test-->
+    <script>
+        $(document).ready(function(){
+			$(document).ready(function(){
+
+				var en_name = <%-en_name%>;
+
+				var ko_name = <%-ko_name%>;
+
+				$("button").mouseover(function() {
+					$(this).html(en_name[$(this).html()]);
+				});
+
+				$("button").mouseleave(function() {
+					$(this).html(ko_name[$(this).html()]);
+				});
+
+			});
+
+        });
+    </script>
 
     </body>
 </html>

@@ -27,8 +27,9 @@ if (g_mapCoords == undefined) {
     });
 }
 
+//Add by cyberccs 2016-09-08 NickName 추가
 //fs.appendFile("./occupied.csv", "date,uid,uname,x,y,dept\n", (err) => {
-fs.appendFile("./occupied.csv", "date,uid,uname,x,y,dept\n", (err) => {
+fs.appendFile("./occupied.csv", "date,uid,uname,nickname,x,y,dept\n", (err) => {
     if (err) {
         console.log(err);
         return;
@@ -72,9 +73,12 @@ exports.index = function(req, res) {
     //res.sendFile(__dirname + '/views/template.html');
     //console.log(g_userInfo);
 
-    console.log("uid: " + req.session.uid + ", uname: " + req.session.uname + ", dept: " + req.session.dept);
+    console.log("uid: " + req.session.uid + ", uname: " + req.session.uname + ", dept: " + req.session.dept + ", nickname: " + req.session.nickname);
+    //console.log("uid: " + req.session.uid + ", uname: " + req.session.uname + ", dept: " + req.session.dept);
     //console.log(g_mapCoords);
+
     var loggedin = false;
+
     if (req.session.uid != undefined) {
         loggedin = true;
     }
@@ -89,6 +93,10 @@ exports.index = function(req, res) {
         
         console.log('TODAY : ' + today);
         //console.log((new Date).toString());
+
+        //test
+        var en_name = {};
+        var ko_name = {};
 
         var uniqResult = [];
         var validResult = result.filter((item) => {
@@ -140,20 +148,32 @@ exports.index = function(req, res) {
                 console.log(uniqResult);
             });
 
-        //console.log("Unique Result: ");
+        //console.log("Unique Result: " + uniqResult.length);
         //console.log(uniqResult);
+
+        //Add by cyberccs 2016-09-08 NickName 추가
+        for(var i = 0; i < uniqResult.length; i++){
+            en_name[uniqResult[i].uname] = uniqResult[i].nickname;
+            ko_name[uniqResult[i].nickname] = uniqResult[i].uname;
+        };
 
         var localVals = {
             uid: req.session.uid, 
             uname: req.session.uname,
+            nickname: req.session.nickname,
             dept: req.session.dept,
             login: loggedin, 
             coords: g_mapCoords, 
             occupied: uniqResult,
-            stylemap: g_styleMap_group
+            stylemap: g_styleMap_group,
+
+            //Add by cyberccs 2016-09-08 NickName 추가
+            en_name: JSON.stringify(en_name),
+            ko_name: JSON.stringify(ko_name)
         };
         
         //console.log(localVals);
+
         console.log("GET Request handler '/' was called End. " + req.session.uname);
 
         res.render('layout', localVals);
@@ -183,16 +203,23 @@ exports.login = function(req, res) {
 
     console.log("found user: ");
     console.log(found);
+
     if (found.length > 0 && 'uname' in found[0] && found[0].uname != undefined && found[0].uname != "") {
         req.session.uid = req.body.emailid;
         req.session.uname = found[0].uname;
         req.session.dept = found[0].dept;
+
+        //Add by cyberccs 2016-09-08 NickName 추가
+        req.session.nickname = found[0].nickname;
 
         res.redirect('/');
     } else {
         req.session.uid = undefined;
         req.session.uname = undefined;
         req.session.dept = undefined;
+
+        //Add by cyberccs 2016-09-08 NickName 추가
+        req.session.nickname = undefined;
 
         res.sendStatus(403);
     }
@@ -208,6 +235,9 @@ exports.logout = function(req, res) {
 
     req.session.uid = undefined;
     req.session.uname = undefined;
+
+    //Add by cyberccs 2016-09-08 NickName 추가
+    req.session.nickname = undefined;
 
     res.redirect('/');
 }
@@ -272,7 +302,8 @@ exports.register = function(req, res) {
     }
 
     var today = (new Date).toLocaleDateString();
-    var data = today + "," + req.session.uid + "," + req.session.uname + "," + req.query.x + "," + req.query.y + "," + req.session.dept + "\n";
+    var data = today + "," + req.session.uid + "," + req.session.uname + "," + req.session.nickname + "," + req.query.x + "," + req.query.y + "," + req.session.dept + "\n";
+    //var data = today + "," + req.session.uid + "," + req.session.uname + "," + req.query.x + "," + req.query.y + "," + req.session.dept + "\n";
 
     //Add by cyberccs 2016-08-31
     //customEvent.emit('CsvReplace', req.session.uname);
