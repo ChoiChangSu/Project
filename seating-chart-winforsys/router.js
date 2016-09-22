@@ -177,7 +177,7 @@ exports.index = function(req, res) {
         console.log("GET Request handler '/' was called End. " + req.session.uname);
 
         res.render('layout', localVals);
-    });    
+    });
 }
 
 /////////////////////////////////////////////////////////////
