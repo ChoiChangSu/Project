@@ -20,6 +20,27 @@
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
         <link href="/stylesheets/winforsys.css" rel="stylesheet">
+
+
+
+        <!-- TEST-->
+        <script> 
+            var speed=500 
+            function flashit(){ 
+            var crosstable=document.getElementById? document.getElementById("myexample") : document.all? document.all.myexample : ""
+
+            if (crosstable){ 
+                if (crosstable.style.color.indexOf("green")!=-1) 
+                    crosstable.style.color="red" 
+                else 
+                    crosstable.style.color="green" 
+                } 
+            } 
+            setInterval("flashit()", speed);
+        </script>
+
+
+
     </head>
     <body>
         
@@ -27,79 +48,178 @@
 
     <% include body %>
 
-    <!-- Add by cyberccs 2016-09-07 NickName 추가-->
-    <script>
-        $(document).ready(function(){
-			$(document).ready(function(){
+        <!-- Add by cyberccs 2016-09-07 NickName 추가-->
+        <script>
+            $(document).ready(function(){
+                $(document).ready(function(){
 
-				var en_name = <%-en_name%>;
+                    var en_name = <%-en_name%>;
 
-				var ko_name = <%-ko_name%>;
+                    var ko_name = <%-ko_name%>;
 
-				$("button").mouseover(function() {
-					$(this).html(en_name[$(this).html()]);
-				});
+                    $("button").mouseover(function() {
+                        $(this).html(en_name[$(this).html()]);
+                    });
 
-				$("button").mouseleave(function() {
-					$(this).html(ko_name[$(this).html()]);
-				});
+                    $("button").mouseleave(function() {
+                        $(this).html(ko_name[$(this).html()]);
+                    });
 
-			});
+                });
 
-        });
-    </script>
+            });
+        </script>
 
-    <!-- Add by cyberccs 2016-09-22 고정석 추가-->
-    <script>
-        $(document).ready(function(){
-			$(document).ready(function(){
+        <!-- Add by cyberccs 2016-09-22 고정석 추가-->
+        <script>
+            $(document).ready(function(){
+                $(document).ready(function(){
 
-                var en_name = {
-					"한창숙" : "Nana",
-                    "이성진" : "Jay",
-                    "남보현" : "Anais",
-                    "오정은" : "Jessica",
-                    "이현민" : "Victor",
-                    "김태훈" : "Roy",
-                    "홍의민" : "Raphael",
-                    "이재윤" : "Chanel",
-                    "김현지" : "Zoe",
-                    "김해연" : "Monica",
-                    "박용순" : "John",
-                    "지경민" : "Walter",
-                    "곽효진" : "Jinny",
-                    "이동률" : "Birdie"
-				};
+                    var en_name = {
+                        "한창숙" : "Nana",
+                        "이동률" : "Birdie"
+                    };
 
-				var ko_name = {
-					"Nana" : "한창숙", 
-                    "Jay" : "이성진",
-                    "Anais" : "남보현",
-                    "Jessica" : "오정은", 
-                    "Victor" : "이현민", 
-                    "Roy" : "김태훈",
-                    "Raphael" : "홍의민", 
-                    "Chanel" : "이재윤",
-                    "Zoe" : "김현지",
-                    "Monica" : "김해연", 
-                    "John" : "박용순",
-                    "Walter" : "지경민",
-                    "Jinny" : "곽효진",
-                    "Birdie" : "이동률" 
-				}
+                    var ko_name = {
+                        "Nana" : "한창숙", 
+                        "Birdie" : "이동률" 
+                    }
 
-				$("button").mouseover(function() {
-					$(this).html(en_name[$(this).html()]);
-				});
+                    $("button").mouseover(function() {
+                        $(this).html(en_name[$(this).html()]);
+                    });
 
-				$("button").mouseleave(function() {
-					$(this).html(ko_name[$(this).html()]);
-				});
+                    $("button").mouseleave(function() {
+                        $(this).html(ko_name[$(this).html()]);
+                    });
 
-			});
+                });
 
-        });
-    </script>
+            });
+        </script>
+        <!--
+        <script>
+            $(document).ready(function(){
+                $(document).ready(function(){
+
+                    var en_name = {
+                        "한창숙" : "Nana",
+                        "이성진" : "Jay",
+                        "남보현" : "Anais",
+                        "오정은" : "Jessica",
+                        "이현민" : "Victor",
+                        "김태훈" : "Roy",
+                        "홍의민" : "Raphael",
+                        "이재윤" : "Chanel",
+                        "김현지" : "Zoe",
+                        "김해연" : "Monica",
+                        "박용순" : "John",
+                        "지경민" : "Walter",
+                        "곽효진" : "Jinny",
+                        "이동률" : "Birdie"
+                    };
+
+                    var ko_name = {
+                        "Nana" : "한창숙", 
+                        "Jay" : "이성진",
+                        "Anais" : "남보현",
+                        "Jessica" : "오정은", 
+                        "Victor" : "이현민", 
+                        "Roy" : "김태훈",
+                        "Raphael" : "홍의민", 
+                        "Chanel" : "이재윤",
+                        "Zoe" : "김현지",
+                        "Monica" : "김해연", 
+                        "John" : "박용순",
+                        "Walter" : "지경민",
+                        "Jinny" : "곽효진",
+                        "Birdie" : "이동률" 
+                    }
+
+                    $("button").mouseover(function() {
+                        $(this).html(en_name[$(this).html()]);
+                    });
+
+                    $("button").mouseleave(function() {
+                        $(this).html(ko_name[$(this).html()]);
+                    });
+
+                });
+
+            });
+        </script>
+        -->
+
+        <!-- Add by cyberccs 2016-10-06 팀 버튼에 애니메이션 추가-->
+        <script>
+            var interval = null;
+            var element = null;
+            var count = 0;
+
+            $( document ).ready( function() {
+                $("input").click(function(){
+                    /*
+                    $( '.CmsDept:button' ).animate({
+                        opacity: 0.25,
+                        left: '+=50',
+                        height: 'toggle'
+                    }, 5000, function() {
+                        // Animation complete.
+                    });
+                    */
+
+                    /*2
+                    $( '.CmsDept:button' ).animate({
+                        height:'toggle'
+                    }, 500)
+                    .animate({ 
+                        height:'toggle'
+                    }, 500, button1_click);
+
+                    $( '.CmsDept:button' ).stop().animate({
+                        height:'toggle'
+                    });
+                    */
+
+                    var className = $(this).attr('class');
+
+                    if (interval != null) {
+                        clearInterval(interval);
+                        interval = null;
+                        element.show();
+
+                        count = 0;
+                    }
+
+                    element = $( '.' + className + ':button' );
+                    var shown = true;
+                    
+                    interval = setInterval(toggle, 500);
+                    
+                    function toggle() {
+                        if (count > 20) {
+                            clearInterval(interval);
+                            interval = null;
+                            element.show();
+
+                            count = 0;
+
+                            return;
+                        }
+
+                        if(shown) {
+                            element.hide();
+                            shown = false;
+                        } else {
+                            element.show();
+                            shown = true;
+                        }
+
+                        count++;
+                    };
+                });
+            });
+        </script>
 
     </body>
 </html>

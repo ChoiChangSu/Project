@@ -3,6 +3,9 @@ const querystring = require("querystring"),
     url = require("url"),
     fs = require("fs");
 
+//cyberccs 날짜 + 시간 표시
+const dt = require('date-utils');
+
 //Add by cyberccs 2016-08-29 이벤트 강제 발생
 var customEvent = new process.EventEmitter();
 
@@ -52,6 +55,10 @@ var g_styleMap_group = {
     'DNI팀': 'DniDept',
     'SAPS팀': 'SapsDept',
     'SMES팀': 'SmesDept',
+    '경영지원부': 'ManagementDept',
+    '디자인팀': 'DesignDept',
+    'SPIDER팀': 'SpiderDept',
+    '응용기술팀': 'AtiDept',
     'DKEC': 'DKEC'
 };
 /*
@@ -91,10 +98,13 @@ exports.index = function(req, res) {
         //console.log("unique?: "); console.log([...uSet]);
         var today = (new Date).toLocaleDateString();
         
-        console.log('TODAY : ' + today);
+        //console.log('TODAY : ' + today);
+        var dt = new Date();
+        var d = dt.toFormat('YYYY-MM-DD HH24:MI:SS');
+        console.log('[' + d + '] ' + '현재 시간');
         //console.log((new Date).toString());
 
-        //test
+        //Add by cyberccs 2016-09-08 NickName 추가
         var en_name = {};
         var ko_name = {};
 
