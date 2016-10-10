@@ -98,11 +98,9 @@ exports.index = function(req, res) {
         //console.log("unique?: "); console.log([...uSet]);
         var today = (new Date).toLocaleDateString();
         
-        //console.log('TODAY : ' + today);
         var dt = new Date();
-        var d = dt.toFormat('YYYY-MM-DD HH24:MI:SS');
-        console.log('[' + d + '] ' + '현재 시간');
-        //console.log((new Date).toString());
+        //var d = dt.toFormat('YYYY-MM-DD HH24:MI:SS');
+        //console.log('[' + d + '] ' + '현재 시간');
 
         //Add by cyberccs 2016-09-08 NickName 추가
         var en_name = {};
@@ -110,29 +108,29 @@ exports.index = function(req, res) {
 
         var uniqResult = [];
         var validResult = result.filter((item) => {
-                console.log('ITEM DATE : ' + item.date);
+                //console.log('ITEM DATE : ' + item.date);
 
                 return item.date == today; 
             }).forEach((element, idx, array) => {
-                console.log('element');
-                console.log(element);
+                //console.log('element');
+                //console.log(element);
                 //console.log('element id : ' + element.uid);
 
                 var foundIndex = uniqResult.findIndex((elem, i, a) => {
-                    console.log('elem id : ' + elem.uid);
+                    //console.log('elem id : ' + elem.uid);
 
-                    console.log(i);
-                    console.log(a);
+                    //console.log(i);
+                    //console.log(a);
 
-                    console.log("foundIndex1 = " + foundIndex);
+                    //console.log("foundIndex1 = " + foundIndex);
 
                     return elem.uid == element.uid;
                 });
 
-                console.log("foundIndex2 = " + foundIndex);
+                //console.log("foundIndex2 = " + foundIndex);
 
-                console.log("uniqResult1");
-                console.log(uniqResult);
+                //console.log("uniqResult1");
+                //console.log(uniqResult);
 
                 uniqResult.push(element);
 
@@ -141,8 +139,8 @@ exports.index = function(req, res) {
                     uniqResult.splice(foundIndex, 1);
                 }
 
-                console.log("uniqResult2");
-                console.log(uniqResult);
+                //console.log("uniqResult2");
+                //console.log(uniqResult);
 
                 foundIndex = uniqResult.findIndex((elem, i, a) => {
                     return elem.uid != element.uid && elem.x == element.x && elem.y == element.y;
@@ -154,8 +152,8 @@ exports.index = function(req, res) {
                     uniqResult.splice(foundIndex, 1);
                 }
 
-                console.log('uniqResult3');
-                console.log(uniqResult);
+                //console.log('uniqResult3');
+                //console.log(uniqResult);
             });
 
         //console.log("Unique Result: " + uniqResult.length);
