@@ -59,6 +59,7 @@ var g_styleMap_group = {
     '디자인팀': 'DesignDept',
     'SPIDER팀': 'SpiderDept',
     '응용기술팀': 'AtiDept',
+    'SFA인턴': 'SFAIntern',
     'DKEC': 'DKEC'
 };
 /*
